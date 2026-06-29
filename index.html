@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Email Creator</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+h1{
+text-align:center;
+color:#0077cc;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:15px;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+button{
+margin-top:20px;
+padding:12px;
+width:100%;
+border:none;
+background:#0077cc;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#005fa3;
+}
+
+#output{
+margin-top:20px;
+background:#f5f5f5;
+padding:15px;
+border-radius:10px;
+white-space:pre-wrap;
+min-height:220px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>📧 Auto Email Creator</h1>
+
+<label>Recipient Name</label>
+<input type="text" id="name" placeholder="Enter Name">
+
+<label>Email Type</label>
+<select id="type">
+<option>Job Application</option>
+<option>Leave Request</option>
+<option>Meeting Request</option>
+<option>Resignation</option>
+<option>Thank You</option>
+<option>Complaint</option>
+<option>General</option>
+</select>
+
+<label>Subject</label>
+<input type="text" id="subject" placeholder="Enter Subject">
+
+<label>Key Details</label>
+<textarea id="details" rows="5" placeholder="Enter important details"></textarea>
+
+<button onclick="generateEmail()">Generate Email</button>
+
+<button onclick="copyEmail()">Copy Email</button>
+
+<div id="output"></div>
+
+</div>
+
+<script>
+
+function generateEmail(){
+
+let name=document.getElementById("name").value;
+let type=document.getElementById("type").value;
+let subject=document.getElementById("subject").value;
+let details=document.getElementById("details").value;
+
+let body="";
+
+switch(type){
+
+case "Job Application":
+body=
+`Subject: ${subject}
+
+Dear ${name},
+
+I hope you are doing well.
+
+I am writing to express my interest in the opportunity. ${details}
+
+I believe my skills and dedication make me a suitable candidate for this position. I would be grateful for the opportunity to discuss my application further.
+
+Thank you for your time and consideration.
+
+Sincerely,
+Your Name`;
+break;
+
+case "Leave Request":
+body=
+`Subject: ${subject}
+
+Dear ${name},
+
+I respectfully request leave due to the following reason:
+
+${details}
+
+Kindly approve my leave request. I assure you that I will complete any pending work upon my return.
+
+Thank you for your understanding.
+
+Regards,
+Your Name`;
+break;
+
+case "Meeting Request":
+body=
+`Subject: ${subject}
+
+Dear ${name},
+
+I hope you are doing well.
+
+I would like to request a meeting regarding the following:
+
+${details}
+
+Please let me know a convenient time.
+
+Thank you.
+
+Best Regards,
+Your Name`;
+break;
+
+case "Resignation":
+body=
+`Subject: ${subject}
+
+Dear ${name},
+
+Please accept this email as my formal resignation.
+
+${details}
+
+I sincerely thank you and the organization for all the support and opportunities provided during my tenure.
+
+Kind Regards,
+Your Name`;
+break;
+
+case "Thank You":
+body=
+`Subject: ${subject}
+
+Dear ${name},
+
+Thank you very much.
+
+${details}
+
+Your support and guidance are greatly appreciated.
+
+Warm Regards,
+Your Name`;
+break;
+
+case "Complaint":
+body=
+`Subject: ${subject}
+
+Dear ${name},
+
+I would like to bring the following issue to your attention.
+
+${details}
+
+I kindly request your assistance in resolving this matter.
+
+Thank you.
+
+Regards,
+Your Name`;
+break;
+
+default:
+body=
+`Subject: ${subject}
+
+Dear ${name},
+
+${details}
+
+Thank you.
+
+Regards,
+Your Name`;
+
+}
+
+document.getElementById("output").innerText=body;
+
+}
+
+function copyEmail(){
+
+let text=document.getElementById("output").innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("Email Copied Successfully!");
+
+}
+
+</script>
+
+</body>
+</html>
